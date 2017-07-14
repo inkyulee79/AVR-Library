@@ -1,15 +1,12 @@
-/*
- * ADC.h
- *
- * Created: 2017-07-12 오전 11:58:50
- *  Author: Inkyu Lee
- */ 
-
+﻿/*
+ADC는 아날로그 값을 읽기 위해 사용되는 모듈입니다.
+ADC is a module which is able to read an analog value.
+*/
 
 #ifndef ADC_H_
 #define ADC_H_
 
-void initADC(unsigned char channel)
+void initADC_default(unsigned char channel)
 {
 	ADMUX |= (1<<REFS0); //AVCC 5V
 	ADCSRA |= 0x07; //분주비
