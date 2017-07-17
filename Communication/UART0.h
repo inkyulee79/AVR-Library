@@ -48,9 +48,16 @@ int isUART0Received()
 	return ((UCSR0A >> TXEN0) & 1);
 }
 
+#ifndef STANDARD_IO_ENABLE
+#define STANDARD_IO_ENABLE
+#include <stdio.h>
+
 FILE OUTPUT \
 = FDEV_SETUP_STREAM(transmitUART0, NULL, _FDEV_SETUP_WRITE);
 FILE INPUT \
 = FDEV_SETUP_STREAM(NULL, receiveUART0, _FDEV_SETUP_READ);
+
+#endif STANDARD_IO_ENABLE
+
 
 #endif /* UART0_H_ */
