@@ -1,4 +1,4 @@
-/*
+﻿/*
 MCU와 7 세그먼트 모듈이 알파벳 순서대로 연결되어 있을 때 정확히 작동합니다.
 This header needs an alphabetic connection between 7-Segment and MCU.
 */
@@ -38,11 +38,12 @@ uint8_t sevenSegmentInit(char portVal)
 }
 
 
-uint8_t sevenSegmentPrint(char portVal, char printParam)
+uint8_t sevenSegmentPrint(char portVal, char printCharVal)
 {
 	uint8_t isPrintSuccessed = 1;
-	uint8_t pattern;
-	switch(printParam)
+	uint8_t pattern = 0x00;
+	
+	switch(printCharVal)
 	{
 		case '0':
 			pattern = 0x3F; //0011 1111
@@ -82,6 +83,63 @@ uint8_t sevenSegmentPrint(char portVal, char printParam)
 			break;
 		case 'E':
 			pattern = 0x79; //0111 1001
+			break;
+		default:
+			isPrintSuccessed = 0;
+	}
+	
+	switch(portVal)
+	{
+		case 'A':
+		case 'a':
+			PORTA = pattern;
+			break;
+		case 'B':
+		case 'b':
+			PORTB = pattern;
+			break;
+		case 'C':
+		case 'c':
+			PORTC = pattern;
+			break;
+		case 'D':
+		case 'd':
+			PORTD = pattern;
+			break;
+		case 'E':
+		case 'e':
+			PORTE = pattern;
+			break;
+		default:
+			isPrintSuccessed = 0;
+	}
+	return isPrintSuccessed;
+}
+
+uint8_t sevenSegmentPrint_CustomPattern(char portVal, uint8_t pattern)
+{
+	uint8_t isPrintSuccessed = 1;
+	switch(portVal)
+	{
+		case 'A':
+		case 'a':
+			PORTA = pattern;
+			break;
+		case 'B':
+		case 'b':
+			PORTB = pattern;
+			break;
+		case 'C':
+		case 'c':
+			PORTC = pattern;
+			break;
+		case 'D':
+		case 'd':
+			PORTD = pattern;
+			break;
+		case 'E':
+		case 'e':
+			PORTE = pattern;
 			break;
 		default:
 			isPrintSuccessed = 0;
